@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 
+// Driver class that takes in training text file and predicts sentiment on given reviews
 
 public class NaiveBayesClassifier {
             public static long posTotal =0;
@@ -16,7 +17,8 @@ public class NaiveBayesClassifier {
             public static Instant end;
             public static HashMap<String, Integer> stopWords = new HashMap<>();
 
-
+        // Adds training and testing words into a HashMap to count frequencies
+            
         public static void addToMap(ArrayList<String> arr,HashMap<String, fraction> m, int isPos){
             double posNum = 0;
             double negNum = 0;
@@ -75,6 +77,9 @@ public class NaiveBayesClassifier {
                 
             }
         }
+         
+        // Calculates negative and postive rating scores and returns the higher value
+            
         public static int classifyRev(String[] arr, HashMap<String, fraction> m){
             
             double posRating = 0;
@@ -147,13 +152,15 @@ public class NaiveBayesClassifier {
         }
 
         public static void main(String[] args) throws Exception{
-
+            // error handling
+                    
             if(args.length != 2){
                 System.out.println("Please enter two files");
                 System.exit(0);
             }
             
-
+            // Takes in testing and training files
+                    
             Scanner scannerTrain = new Scanner(new File(args[0]));
             Scanner scannerTrain2 = new Scanner(new File(args[0]));
             Scanner scannerTest = new Scanner(new File(args[1])); 
@@ -167,6 +174,9 @@ public class NaiveBayesClassifier {
             int isPos = -1;
             
             start = Instant.now();
+            
+            // Adds the words of the training data into a Map for calculations
+                    
             while(scannerTrain.hasNextLine()){
                 
                 line  = scannerTrain.nextLine();
@@ -203,6 +213,9 @@ public class NaiveBayesClassifier {
             
 
             start = Instant.now();
+                    
+            // takes in the testing data and uses training data to predict the sentiment
+                    
             while(scannerTrain2.hasNextLine()){
                 line  = scannerTrain2.nextLine();
                 wordsTemp= line.split(" ");
